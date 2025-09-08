@@ -19,7 +19,7 @@ public class TicketSystemController {
 
     @PostMapping
     public String createTicket(@RequestBody TicketRequest ticket) {
-        ticketService.travel(traveller, ticket.ticket()).travel();
+        ticketService.travel(traveller, ticket.ticket());
         return "Ticket created successfully!";
     }
 }
