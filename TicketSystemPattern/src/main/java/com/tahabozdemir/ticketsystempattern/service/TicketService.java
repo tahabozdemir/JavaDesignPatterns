@@ -1,7 +1,6 @@
 package com.tahabozdemir.ticketsystempattern.service;
 
 import com.tahabozdemir.ticketsystempattern.model.Ticket;
-import com.tahabozdemir.ticketsystempattern.model.Traveller;
 import com.tahabozdemir.ticketsystempattern.strategy.TravellingStrategy;
 import com.tahabozdemir.ticketsystempattern.strategy.impl.BoatStrategy;
 import com.tahabozdemir.ticketsystempattern.strategy.impl.BusStrategy;
@@ -9,7 +8,6 @@ import com.tahabozdemir.ticketsystempattern.strategy.impl.PlaneStrategy;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.Map;
 
 @Service
@@ -22,7 +20,7 @@ public class TicketService {
 
     @PostConstruct
     public void init() {
-         strategyMap = java.util.Map.of(
+         strategyMap = Map.of(
                 Ticket.PLANE, planeStrategy,
                 Ticket.BUS, busStrategy,
                 Ticket.BOAT, boatStrategy
