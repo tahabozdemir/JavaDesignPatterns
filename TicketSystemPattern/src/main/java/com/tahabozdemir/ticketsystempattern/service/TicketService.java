@@ -1,5 +1,6 @@
 package com.tahabozdemir.ticketsystempattern.service;
 
+import com.tahabozdemir.ticketsystempattern.chain.TravelChain;
 import com.tahabozdemir.ticketsystempattern.model.Ticket;
 import com.tahabozdemir.ticketsystempattern.strategy.TravellingStrategy;
 import com.tahabozdemir.ticketsystempattern.strategy.impl.BoatStrategy;
@@ -17,17 +18,28 @@ public class TicketService {
     private final BusStrategy busStrategy;
     private final BoatStrategy boatStrategy;
     private Map<Ticket, TravellingStrategy> strategyMap;
+    private TravelChain travelChain;
 
     @PostConstruct
     public void init() {
-         strategyMap = Map.of(
-                Ticket.PLANE, planeStrategy,
-                Ticket.BUS, busStrategy,
-                Ticket.BOAT, boatStrategy
-        );
+        TravelChain busChain = new BusStrategy();
+        TravelChain boatChain = new BoatStrategy();
+        TravelChain planeChain = new PlaneStrategy();
+
+        busChain.setNextChain(boatChain);
+        boatChain.setNextChain(planeChain);
+
+        this.travelChain = busChain;
+
+//         strategyMap = Map.of(
+//                Ticket.PLANE, planeStrategy,
+//                Ticket.BUS, busStrategy,
+//                Ticket.BOAT, boatStrategy
+//        );
     }
 
     public void travel(Ticket ticket) {
-         strategyMap.get(ticket).travel();
+//         strategyMap.get(ticket).travel();
+        travelChain.travelWith(ticket);
     }
 }

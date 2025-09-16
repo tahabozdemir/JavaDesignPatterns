@@ -1,7 +1,11 @@
 package com.tahabozdemir.ticketsystempattern.controller;
 
+import com.tahabozdemir.ticketsystempattern.chain.TravelChain;
 import com.tahabozdemir.ticketsystempattern.model.request.TicketRequest;
 import com.tahabozdemir.ticketsystempattern.service.TicketService;
+import com.tahabozdemir.ticketsystempattern.strategy.impl.BoatStrategy;
+import com.tahabozdemir.ticketsystempattern.strategy.impl.BusStrategy;
+import com.tahabozdemir.ticketsystempattern.strategy.impl.PlaneStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
