@@ -22,14 +22,9 @@ public class TicketService {
 
     @PostConstruct
     public void init() {
-        TravelChain busChain = new BusStrategy();
-        TravelChain boatChain = new BoatStrategy();
-        TravelChain planeChain = new PlaneStrategy();
-
-        busChain.setNextChain(boatChain);
-        boatChain.setNextChain(planeChain);
-
-        this.travelChain = busChain;
+        busStrategy.setNextChain(boatStrategy);
+        boatStrategy.setNextChain(planeStrategy);
+        this.travelChain = busStrategy;
 
 //         strategyMap = Map.of(
 //                Ticket.PLANE, planeStrategy,
